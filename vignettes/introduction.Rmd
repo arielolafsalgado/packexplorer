@@ -1,0 +1,111 @@
+title: "packexplorer: A tool for discovering new packages"
+author: "Ariel Salgado, Andrés Farrall, Inés Caridi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# Packages and their underlying network
+packexplorer exploits the network representation of CRAN, based on three of the CRAN-relations: Depends, Imports and Suggests. You can look for more information about this relations in https://cran.r-project.org/doc/manuals/r-release/R-exts.html, but for short:
+
+- Depends represents a full necesity of package A to other package B, but also that both of them (A and B) will be loaded when using library() or require() for package A. So, the package B's author usually expects the user will need both packages working together.
+- Imports represents the standard dependency between packages: one needs the functions of the other.
+- Suggests indicates a "nice" combination between two packages, tipically consolidated by the presence of both in a R-vignette, or another type of example.
+- Enhances represents a Depends-like relation, with the addition that the package was specifically build to improve the previous package.
+
+Based on this three relationships, packexplorer constructs a network connecting packages between eachother using information from the description of the packages.
+
+# Traveling around on your own package network
+Using packexplorer you can see your own installed packages, with an easy access to their descriptions based on a leaflet visualization.
+Start asking which are your packages:
+
+```
+library(packexplorer)
+my_packages()
+```
+
+This function will print on the screen the names of your installed packages. If you give it a path, it will write them down there:
+
+```
+my_packages("my_packages.txt")
+```
+
+packexplorer provides you with tools to generate your own package network:
+
+```
+my_nets = my_network()
+```
+
+Now, you have four igraph objects in my_nets, "Dep","Sug","Imp" and "Enh", each one containing the graph with your packages as nodes, and the specified relation as links.
+
+```
+# Try plotting it!
+plot(my_nets$Sug,edge.color='red')
+```
+
+## One step further: related packages
+After seeing your own package network, you can look at the packages near you in terms of the global network. packexplorer has the function `plot_neighbors`. You can use it to check your own network only, or your own network plus first, second or third neighbors. This function will plot them on leaflet, so you can start searching around for new stuff!
+
+```
+plot_neighbors(my_packs=my_packages(),order=0) 
+plot_neighbors(my_packs=my_packages(),order=1) 
+```
+
+# What should I choose?
+
+Using plot_neighbors you can see new (not yet installed) packages, you can look at their description, and eventually install them. But the question arises: Which one is the most interesting for me? For now on, packexplorer gives you two possible answers: you can consider the most downloaded packages near to you, or the one who has more connections with your own packages. Following the first option, you can ask `plot_neighbors` to use the available information of daily downloads to choose the size of the circle in the plot.
+
+```
+plot_neighbors(my_packs=my_packages(),point.size='downloads',order=1) 
+```
+
+But maybe you prefer to base your choice on the functional relation between the new packages and the older ones. In this case, packexplorer provides you with the function `give.me.one` which gives you a recommendation about what package to install, based on a relation type. You can also specify if you want the new package to point to your installed packages, suggesting as many as possible of them, or the opposite: to find the package that is most recommended from your packages.
+
+```
+# Suggesting your packages:
+give.me.one(relationship='suggests',kind.of='to_packages')
+
+# Suggested by your packages:
+give.me.one(relationship='suggests',kind.of='from_packages')
+```
+
+packexplorer assigns a score based on the number of connections between your packages and the neighborhood. You can also use this score to visualize the neighborhood in `plot_neighbors`:
+
+```
+plot_neighbors(relationship='suggests',my_packs=my_packages(),order=1,point.size='score') 
+```
+
+## Aditional exploratory functions
+Suppose that `give.me.one` tells you to install `ggplot2`, and you want to know more about this package. You can gain knowledge looking at what packages connect with it. For this, packexplorer provides the function `who.are.you`, which tells you what packages, and what relations are connected with the packages of your interest.
+
+```
+who.are.you('ggplot2',plot.it=T,on.leaflet=T,facts=F,point.size='downloads')
+```
+
+Again, you can specify different mechanisms to assign the size of the circles.
+
+Another possible situation is that you are interested in some kind of concept that can be summarized in some word, like "information", and you want to look for packages related to this word. Using `expre2graph`, packexplorer constructs a network with the packages containing this specified term in their description.
+
+```
+expre2graph('information',plot.it=T)
+```
+
+# One last thing
+If you liked this package, we ask you to collaborate with the project: could you send us the list of your packages? We are studying the network structure of the R users, and we need some samples to do the job. We will also ask for some extra info about your work subject. If you agree, you can send it to us using the function 
+
+```
+send_your_packages()
+```
+
+It is based on the `mailR`, and we don't ask for any personal information except for your email - we will not use this information for more than asociating an unique id to the data. 
+
+Thank you, we hope you have liked it!

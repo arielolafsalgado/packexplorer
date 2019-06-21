@@ -1,0 +1,12 @@
+Package: packexplorer
+Title: Help in searching for new packages
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: This package provides you with tools for exploring the CRAN, and visualize the relations between packages. You can use leaflet to build your own package network, and get information about new packages, related to the packages you usually use.
+Depends: R (>= 3.4), leaflet, igraph, Matrix, htmltools, stringr
+Suggests: mailR, knitr, dlstats, rmarkdown
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
