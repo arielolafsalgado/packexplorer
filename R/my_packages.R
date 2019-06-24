@@ -1,6 +1,6 @@
 #' Your own packages
 #'
-#' This function prints your packages on screen or to a file.
+#' This function prints your packages on screen or in a file.
 #' @param file The file path to write down your packages 
 #' @return A string with the names of your installed packages
 #' @export
