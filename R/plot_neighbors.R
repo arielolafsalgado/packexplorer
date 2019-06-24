@@ -1,6 +1,6 @@
 #' Discover new packages, related to the ones you have
 #'
-#' Plots your network, plus its firts neighbors, using leaflet.
+#' Plot your network, plus its firts neighbors, using leaflet.
 #' @param relationship The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'. 
 #' @param my_packs The packages that you are interested to use as reference. Default is your installed packages
 #' @param kind.of The direction of the relations. If you want packages recommending my_packs, it should be "to_packages", and if you want packages recommended by my_packs, it should be "from_packages". It can also be "all".
