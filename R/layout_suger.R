@@ -1,9 +1,9 @@
 #' Makes a layout to highlight the new suggested package
 #'
 #' It is useful to understand to wich packages the new one is related
-#' @param gs The package graph, as an igraph object. Usually the Suggests graph. 
+#' @param gs The package's graph, as an igraph object. Usually the Suggests graph. 
 #' @param suggested The suggested package.
-#' @param gd The package graph, as an igraph object. Usually the Depends graph. Default is NULL. If not, the two kinds of relations are used to make the layout.
+#' @param gd The package's graph, as an igraph object. Usually the Depends graph. Default is NULL. If not, the two kinds of relations are used to make the layout.
 #' @param recenter.suggested If TRUE, the new package is recentered
 #' @param layout.fun The function used for the layout of the other packages.
 #' @return A matrix to be used as layout.
