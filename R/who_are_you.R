@@ -2,23 +2,21 @@
 #'
 #' This function gives you an ego network of a package (the package and its surrounders).
 #' @param pack The package(s) of interest.
-#' @param gs The package graph, as an igraph object. Usually the Suggests graph.
-#' @param gd The package graph, as an igraph object. Usually the Depends graph.
 #' @param plot.it Should the network be plotted? Default is TRUE
-#' @param on.leaflet Should the plot be done in leaflet? Default is FALSE
-#' @param facts Should the output contain facts about the package? Default is TRUE
-#' @param point.size The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them.
+#' @param on.leaflet Should the plot be done in leaflet? Default is TRUE
+#' @param facts Should the output contain facts about the package? Default is FALSE
+#' @param point.size The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them. If you want to specify a size use min.point.size
 #' @param add_my_packs Should your packages be added to the plot? Default is FALSE
-#' @param my_packs_neighbors If add_my_packs is TRUE, should only keep the surrounders of pack? Default is TRUE
+#' @param my_packs_neighbors If add_my_packs is TRUE, should only keep the surrounders of pack? Default is FALSE
 #' @param min.point.size The min point size, passed to leaflet. Default is 15
 #' @param max.point.size The max point size, passed to leaflet. Default is 30
 #' @return A dataframe and also a plot.
 #' @export
 #' @examples
-#' who.are.you('ggplot2',gs,gd,des=desc,cats=cats,downloads=downloads)
+#' who.are.you('ggplot2')
 
 
-who.are.you <- function(pack,plot.it = TRUE,facts=TRUE,on.leaflet=FALSE,nwords=5,add_my_packs=FALSE,my_packs_neighbors=TRUE,point.size='downloads',min.point.size=15,max.point.size=30,...){
+who.are.you <- function(pack,plot.it = TRUE,facts=FALSE,on.leaflet=TRUE,nwords=5,add_my_packs=FALSE,my_packs_neighbors=FALSE,point.size='downloads',min.point.size=15,max.point.size=30,...){
 	data('des')
 	data('cats')
 	data('downloads')
@@ -53,7 +51,8 @@ who.are.you <- function(pack,plot.it = TRUE,facts=TRUE,on.leaflet=FALSE,nwords=5
 		if(add_my_packs){
 			my_packs = rownames(installed.packages())
 			if(my_packs_neighbors){
-				my_packs = intersect(my_packs,neighbors(graph=igraph::union(gs,gd),v=pack, mode = 'all'))
+				g_full = igraph::union(gs,igraph::union(gd,igraph::union(gi,ge)))
+				my_packs = intersect(my_packs,neighbors(graph=g_full,v=pack, mode = 'all'))
 			}
 			packlist = c(packlist,my_packs)
 			packlist = intersect(packlist,union(V(gs)$name,V(gd)$name))
