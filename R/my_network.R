@@ -4,7 +4,7 @@
 #' @return A list with igraph objects, one for each input graph.
 #' @export
 #' @examples
-#' g = my_network(gd,gs)
+#' g = my_network()
 #' plot(g)
 
 
