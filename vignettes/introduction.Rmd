@@ -24,7 +24,7 @@ packexplorer exploits the network representation of CRAN, based on three of the 
 
 Based on this three relationships, packexplorer constructs a network connecting packages between eachother using information from the description of the packages.
 
-# Traveling around on your own package network
+# Traveling around your own package network
 Using packexplorer you can see your own installed packages, with an easy access to their descriptions based on a leaflet visualization.
 Start asking which are your packages:
 
