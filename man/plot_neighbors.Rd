@@ -7,10 +7,10 @@
 plot_neighbors(relationship = "suggests",
   my_packs = rownames(installed.packages()), kind.of = "to_packages",
   order = 1, point.size = "score", apply.degree.filter = F,
-  nwords = 5)
+  nwords = 5, min.point.size = 15, max.point.size = 30)
 }
 \arguments{
-\item{relationship}{The kind of relationship to use for neighbouring. It can be 'suggests' or 'depends'.}
+\item{relationship}{The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'.}
 
 \item{my_packs}{The packages that you are interested to use as reference. Default is your installed packages}
 
@@ -23,12 +23,16 @@ plot_neighbors(relationship = "suggests",
 \item{apply.degree.filter}{If TRUE, the score of each package is multiplied by the fraction of its edges that conect to my_packs.}
 
 \item{nwords}{The number of words appearing in the description of the package, per row.}
+
+\item{min.point.size}{The min point size, passed to leaflet. Default is 15}
+
+\item{max.point.size}{The max point size, passed to leaflet. Default is 30}
 }
 \value{
 A list with packages and scores for each one.
 }
 \description{
-Plots your network, plus its firts neighbors, using leaflet.
+Plot your network, plus its firts neighbors, using leaflet.
 }
 \examples{
 plot_neighbors(gs,point.size='score',downloads=downloads)

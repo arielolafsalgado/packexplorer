@@ -4,28 +4,29 @@
 \alias{who.are.you}
 \title{Discover new packages, related to the ones you have}
 \usage{
-who.are.you(pack, plot.it = TRUE, facts = TRUE, on.leaflet = FALSE,
-  nwords = 5, add_my_packs = FALSE, my_packs_neighbors = TRUE,
-  point.size = "downloads", ...)
+who.are.you(pack, plot.it = TRUE, facts = FALSE, on.leaflet = TRUE,
+  nwords = 5, add_my_packs = FALSE, my_packs_neighbors = FALSE,
+  point.size = "downloads", min.point.size = 15, max.point.size = 30,
+  ...)
 }
 \arguments{
 \item{pack}{The package(s) of interest.}
 
 \item{plot.it}{Should the network be plotted? Default is TRUE}
 
-\item{facts}{Should the output contain facts about the package? Default is TRUE}
+\item{facts}{Should the output contain facts about the package? Default is FALSE}
 
-\item{on.leaflet}{Should the plot be done in leaflet? Default is FALSE}
+\item{on.leaflet}{Should the plot be done in leaflet? Default is TRUE}
 
 \item{add_my_packs}{Should your packages be added to the plot? Default is FALSE}
 
-\item{my_packs_neighbors}{If add_my_packs is TRUE, should only keep the surrounders of pack? Default is TRUE}
+\item{my_packs_neighbors}{If add_my_packs is TRUE, should only keep the surrounders of pack? Default is FALSE}
 
-\item{point.size}{The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them.}
+\item{point.size}{The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them. If you want to specify a size use min.point.size}
 
-\item{gs}{The package graph, as an igraph object. Usually the Suggests graph.}
+\item{min.point.size}{The min point size, passed to leaflet. Default is 15}
 
-\item{gd}{The package graph, as an igraph object. Usually the Depends graph.}
+\item{max.point.size}{The max point size, passed to leaflet. Default is 30}
 }
 \value{
 A dataframe and also a plot.
@@ -34,5 +35,5 @@ A dataframe and also a plot.
 This function gives you an ego network of a package (the package and its surrounders).
 }
 \examples{
-who.are.you('ggplot2',gs,gd,des=desc,cats=cats,downloads=downloads)
+who.are.you('ggplot2')
 }

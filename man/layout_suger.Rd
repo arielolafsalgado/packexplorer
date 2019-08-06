@@ -8,11 +8,11 @@ layout_suger(gs, suggested, gd = NULL, recenter.suggested = TRUE,
   layout.fun = layout_nicely)
 }
 \arguments{
-\item{gs}{The package graph, as an igraph object. Usually the Suggests graph.}
+\item{gs}{The package's graph, as an igraph object. Usually the Suggests graph.}
 
 \item{suggested}{The suggested package.}
 
-\item{gd}{The package graph, as an igraph object. Usually the Depends graph. Default is NULL. If not, the two kinds of relations are used to make the layout.}
+\item{gd}{The package's graph, as an igraph object. Usually the Depends graph. Default is NULL. If not, the two kinds of relations are used to make the layout.}
 
 \item{recenter.suggested}{If TRUE, the new package is recentered}
 

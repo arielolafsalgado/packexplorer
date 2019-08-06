@@ -13,7 +13,7 @@ my_packages(file = NULL)
 A string with the names of your installed packages
 }
 \description{
-This function prints your packages on screen or to a file.
+This function prints your packages on screen or in a file.
 }
 \examples{
 my_packages()

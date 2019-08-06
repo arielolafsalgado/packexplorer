@@ -2,7 +2,7 @@
 % Please edit documentation in R/number_of_conecting_edges.R
 \name{number_of_conecting_edges}
 \alias{number_of_conecting_edges}
-\title{Gets the number of conecting edges between two groups}
+\title{Get the number of conecting edges between two groups}
 \usage{
 number_of_conecting_edges(g, group1, group2, mode = "all")
 }
@@ -13,7 +13,7 @@ number_of_conecting_edges(g, group1, group2, mode = "all")
 
 \item{group2}{The arrival set of nodes}
 
-\item{mode}{The direction of the edges to be considered. If 'in', the edges considered will be incident over group1, if 'out', will be incident over group2, if 'all', all edges are considered.}
+\item{mode}{The direction of the edges to be considered. If 'in', the edges considered will be incidents over group1, if 'out', will be incident over group2, if 'all', all edges are considered.}
 }
 \description{
 It calculates the number of edges from group1 to group2

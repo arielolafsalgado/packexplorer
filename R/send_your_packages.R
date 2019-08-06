@@ -21,20 +21,17 @@ send_your_packages <- function(){
 	}
 	packages = my_packages()
 	mail = readline(prompt="I will need your email, we promise not to use this information for referring data
-")
+Type you email:")
 	areas = readline(prompt="And maybe you can say me 3 areas where you work.
 Example: Physics, Statistics, Networks
 ")
-	favpack = readline(prompt="Also, I would ask you your favorite R-packages (no more than 10).
-Example: leaflet, igraph, stringr, Matrix
-")
-	mailBody = paste(paste("Areas: ", areas),paste("Favorite packages: ", favpack),paste("Packages: ",paste(packages,collapse=", ")),sep="\n")
+	mailBody = paste(paste("Areas: ", areas),paste("Packages: ",paste(packages,collapse=", ")),sep="\n")
 	cat("This is the mail body\n")
 	cat(mailBody)
-	askSend = readinteger(prompt="Do you agree to send it?
+	askSend = readinteger(prompt="Do you agree with sending it?
 1:YES
 2:NO
-")
+Answer number:")
 	if(askSend==1){
 		mailR::send.mail(from = mail, 
 				to = "arielolafsalgado@gmail.com",subject=paste(mail,"packages"),

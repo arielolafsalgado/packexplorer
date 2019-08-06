@@ -13,6 +13,6 @@ A list with igraph objects, one for each input graph.
 This function gives you your own package network, based on the avaiable general networks.
 }
 \examples{
-g = my_network(gd,gs)
+g = my_network()
 plot(g)
 }

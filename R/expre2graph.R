@@ -17,7 +17,7 @@
 #' expression = 'information'
 #' expre2graph(expression)
 
-expre2graph <- function(expression,plot.it=FALSE,max.distance = 0, ignore.case = FALSE,first.neighbors=FALSE,generate_output=TRUE,fixed=TRUE,point.size='downloads',nwords=5,min.point.size=15,max.point.size=30){
+expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_output=TRUE,point.size='downloads',nwords=5,min.point.size=15,max.point.size=30){
 	data('des')
 	data('cats')
 	data('downloads')
@@ -29,7 +29,7 @@ expre2graph <- function(expression,plot.it=FALSE,max.distance = 0, ignore.case =
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
 	ladesc <- tolower(as.character(desc$Description))
-	cuales <- agrep(tolower(expression), ladesc, max.distance = max.distance, ignore.case = ignore.case,fixed=fixed)
+	cuales <- grep(tolower(expression), ladesc,ignore.case = T)
 	if(length(cuales)==0) return('No package found')
 	nodos_expre <- desc$Package[cuales]
 	nodos_vecinos_gd <- NULL 

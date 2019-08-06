@@ -9,7 +9,7 @@ recommend.me(relationship = "suggests",
   apply.degree.filter = F, niter = 50, nMax = NULL)
 }
 \arguments{
-\item{relationship}{The kind of relationship to use for recommendation. It can be 'suggests' or 'depends'.}
+\item{relationship}{The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'.}
 
 \item{my_packs}{The packages that you are interested to use as reference. Default is your installed packages}
 
