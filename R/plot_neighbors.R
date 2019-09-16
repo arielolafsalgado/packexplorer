@@ -39,7 +39,7 @@ plot_neighbors <- function(relationship='suggests',my_packs = rownames(installed
 	if(any(is.element(names(scores),V(g)$name))){
 		V(g)$score[match(names(scores),V(g)$name)] = scores
 	}
-	l = layout_nicely(g)
+	l = scale(layout_nicely(g))
 	listConections = list_conections(graph = g,layout = l)
 	labs = generate_labels(graph=g,nwords=nwords)
 
