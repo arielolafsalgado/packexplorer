@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you hace
+#' Discover new packages, related to the ones you have
 #'
 #' This function provides you with recommendations of new packages to install.
 #' @param relationship The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'. 
@@ -15,7 +15,7 @@
 #' @examples
 #' pack_list = recommend.me(graph.dep,graph.sug)
 #' install.packages(names(pack_list)[1])
-
+#' importFrom igraph V induced_subgraph degree
 
 recommend.me <- function(relationship='suggests',my_packs = rownames(installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
 	data('dependsGraph')
