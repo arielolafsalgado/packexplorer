@@ -3,14 +3,14 @@
 #' This functions help manage the text in the leaflet plotting
 #' @param graph The graph to be plotted.
 #' @param layout The layout of the graph 
-#' @param texto The text to be parsed.
+#' @param text The text to be parsed.
 #' @param nwords The number of words per line.
 #' @param pack The package of interest
 #' @return Multiple values depending on function
 #' 
 #' @export
 #' @examples
-
+#' importsFrom igraph V
 generate_labels <- function(graph,nwords=15){
 	data('des')
 	data('cats')
