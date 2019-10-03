@@ -14,6 +14,9 @@
 #' @export
 #' @examples
 #' plot_neighbors(gs,point.size='score',downloads=downloads)
+#' importFrom igraph V neighborhood induced_subraph layout_nicely
+#' importFrom htmltools HTML
+#' importFrom leaflet leaflet addCircleMarkers addPolylines addLegend
 
 plot_neighbors <- function(relationship='suggests',my_packs = rownames(installed.packages()),kind.of='to_packages',order=1,point.size='score',apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
 	data('des')
