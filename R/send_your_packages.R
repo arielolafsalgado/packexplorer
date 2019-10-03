@@ -15,6 +15,11 @@ send_your_packages <- function(){
 ")
 		if(askInst==1){
 			install.packages('mailR')
+			 if (requireNamespace("mailR", quietly = TRUE)) {
+				print('Succesfully installed!')
+			} else {
+				return("Couldn't install it. Please solve conflicts and try again")
+			}
 		}else{
 			return('Ok!')
 		}
