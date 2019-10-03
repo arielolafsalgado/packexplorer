@@ -6,7 +6,7 @@
 #' @examples
 #' g = my_network()
 #' plot(g)
-
+#' importFrom igraph induced_subgraph V
 
 my_network <- function(){
 	data('dependsGraph')
