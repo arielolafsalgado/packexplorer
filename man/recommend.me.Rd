@@ -2,11 +2,12 @@
 % Please edit documentation in R/recommend_me.R
 \name{recommend.me}
 \alias{recommend.me}
-\title{Discover new packages, related to the ones you hace}
+\title{Discover new packages, related to the ones you have}
 \usage{
 recommend.me(relationship = "suggests",
-  my_packs = rownames(installed.packages()), kind.of = "to_packages",
-  apply.degree.filter = F, niter = 50, nMax = NULL)
+  my_packs = rownames(utils::installed.packages()),
+  kind.of = "to_packages", apply.degree.filter = F, niter = 50,
+  nMax = NULL)
 }
 \arguments{
 \item{relationship}{The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'.}
@@ -28,6 +29,8 @@ A list with packages and scores for each one.
 This function provides you with recommendations of new packages to install.
 }
 \examples{
-pack_list = recommend.me(graph.dep,graph.sug)
+\dontrun{
+pack_list = recommend.me()
 install.packages(names(pack_list)[1])
+}
 }

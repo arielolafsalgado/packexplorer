@@ -4,18 +4,12 @@
 \alias{cut_string}
 \title{Auxiliary functions for the leaflet plotting}
 \usage{
-cut_string(texto, nwords = 15)
+cut_string(text, nwords = 15)
 }
 \arguments{
-\item{texto}{The text to be parsed.}
+\item{text}{The text to be parsed.}
 
 \item{nwords}{The number of words per line.}
-
-\item{graph}{The graph to be plotted.}
-
-\item{layout}{The layout of the graph}
-
-\item{pack}{The package of interest}
 }
 \value{
 Multiple values depending on the function

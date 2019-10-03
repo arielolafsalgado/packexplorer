@@ -10,16 +10,6 @@ list_conections(graph, layout)
 \item{graph}{The graph to be plotted.}
 
 \item{layout}{The layout of the graph}
-
-\item{des}{The descriptions dataframe.}
-
-\item{cats}{The categories dataframe.}
-
-\item{texto}{The text to be parsed.}
-
-\item{nwords}{The number of words per line.}
-
-\item{pack}{The package of interest}
 }
 \value{
 Multiple values depending on function

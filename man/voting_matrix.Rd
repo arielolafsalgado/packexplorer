@@ -4,7 +4,7 @@
 \alias{voting_matrix}
 \title{Discover new packages, related to the ones you hace}
 \usage{
-voting_matrix(G, my_packs = row.names(installed.packages()),
+voting_matrix(G, my_packs = row.names(utils::installed.packages()),
   kind.of = "to_packages")
 }
 \arguments{
@@ -21,5 +21,7 @@ A list with packages and scores for each one.
 This function creates the voting matrix from your packages and the package graph.
 }
 \examples{
-X = voting_matrix(G,my_packs,kind.of='to_packages')
+gs = my_network()[['Sug']]
+pack = my_packages()[1]
+X = voting_matrix(gs,my_packs=pack)
 }

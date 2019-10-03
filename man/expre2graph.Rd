@@ -5,8 +5,8 @@
 \title{Discover new packages, related to the ones you have}
 \usage{
 expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
-  generate_output = TRUE, point.size = "downloads", nwords = 5,
-  min.point.size = 15, max.point.size = 30)
+  generate_output = TRUE, point.size = "downloads",
+  min.point.size = 15, max.point.size = 30, nwords = 5)
 }
 \arguments{
 \item{expression}{The expression of interest}
@@ -23,11 +23,7 @@ expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
 
 \item{max.point.size}{The max point size, passed to leaflet. Default is 30}
 
-\item{max.distance}{passed to agrep}
-
-\item{ignore.case}{passed to agrep}
-
-\item{fixed}{passed to agrep}
+\item{nwords}{Number of words per line in the description of the package}
 }
 \value{
 Graph plot in leaflet, and an igraph object.

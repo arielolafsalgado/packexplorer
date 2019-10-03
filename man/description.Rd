@@ -8,14 +8,6 @@ description(pack)
 }
 \arguments{
 \item{pack}{The package of interest}
-
-\item{graph}{The graph to be plotted.}
-
-\item{layout}{The graph layout}
-
-\item{texto}{The text to be parsed.}
-
-\item{nwords}{The number of words per line.}
 }
 \value{
 Multiple values depending on the function

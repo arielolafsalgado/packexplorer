@@ -1,11 +1,16 @@
 Package: packexplorer
 Title: Help in searching for new packages
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Authors@R: as.person(c(
+    "Ariel Salgado <asalgado@df.uba.ar> [aut, cre]", 
+    "Andrés Farall <afarall@gmail.com> [aut]",
+    "Inés Caridi <ines@df.uba.ar> [aut]"
+  ))
 Description: This package provides you with tools for exploring the CRAN, and visualize the relations between packages. You can use leaflet to build your own package network, and get information about new packages, related to the packages you usually use.
-Depends: R (>= 3.4), leaflet, igraph, Matrix, htmltools, stringr
-Suggests: mailR, knitr, dlstats, rmarkdown
-License: What license is it under?
+Depends: R (>= 3.4), igraph
+Imports: leaflet, stringr, Matrix, htmltools, methods
+Suggests: mailR, knitr, rmarkdown
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

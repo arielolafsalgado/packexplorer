@@ -5,9 +5,10 @@
 \title{Discover new packages, related to the ones you have}
 \usage{
 plot_neighbors(relationship = "suggests",
-  my_packs = rownames(installed.packages()), kind.of = "to_packages",
-  order = 1, point.size = "score", apply.degree.filter = F,
-  nwords = 5, min.point.size = 15, max.point.size = 30)
+  my_packs = rownames(utils::installed.packages()),
+  kind.of = "to_packages", order = 1, point.size = "score",
+  apply.degree.filter = F, nwords = 5, min.point.size = 15,
+  max.point.size = 30)
 }
 \arguments{
 \item{relationship}{The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'.}
@@ -35,5 +36,5 @@ A list with packages and scores for each one.
 Plot your network, plus its firts neighbors, using leaflet.
 }
 \examples{
-plot_neighbors(gs,point.size='score',downloads=downloads)
+plot_neighbors()
 }

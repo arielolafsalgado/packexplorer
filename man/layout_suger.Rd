@@ -4,8 +4,7 @@
 \alias{layout_suger}
 \title{Makes a layout to highlight the new suggested package}
 \usage{
-layout_suger(gs, suggested, gd = NULL, recenter.suggested = TRUE,
-  layout.fun = layout_nicely)
+layout_suger(gs, suggested, gd = NULL, recenter.suggested = TRUE)
 }
 \arguments{
 \item{gs}{The package's graph, as an igraph object. Usually the Suggests graph.}
@@ -15,18 +14,10 @@ layout_suger(gs, suggested, gd = NULL, recenter.suggested = TRUE,
 \item{gd}{The package's graph, as an igraph object. Usually the Depends graph. Default is NULL. If not, the two kinds of relations are used to make the layout.}
 
 \item{recenter.suggested}{If TRUE, the new package is recentered}
-
-\item{layout.fun}{The function used for the layout of the other packages.}
 }
 \value{
 A matrix to be used as layout.
 }
 \description{
 It is useful to understand to wich packages the new one is related
-}
-\examples{
-sgs = add.a.package(gs)
-pack = give.me.one(gs)
-layout = layout_suger(gs,pack)
-plot(sgs,layout=layout)
 }

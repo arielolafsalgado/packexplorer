@@ -13,5 +13,7 @@ Nothing, it just sends the e-mail.
 This function sends your packages to the authors, using the 'mailR' package.
 }
 \examples{
+\dontrun{
 send_your_packages()
+}
 }

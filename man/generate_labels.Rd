@@ -10,12 +10,6 @@ generate_labels(graph, nwords = 15)
 \item{graph}{The graph to be plotted.}
 
 \item{nwords}{The number of words per line.}
-
-\item{layout}{The layout of the graph}
-
-\item{texto}{The text to be parsed.}
-
-\item{pack}{The package of interest}
 }
 \value{
 Multiple values depending on function
