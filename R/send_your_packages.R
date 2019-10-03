@@ -4,8 +4,9 @@
 #' @return Nothing, it just sends the e-mail.
 #' @export
 #' @examples
+#' \dontrun{
 #' send_your_packages()
-
+#' }
 send_your_packages <- function(){
 	checkMailR = is.element('mailR',my_packages())
 	if(!checkMailR){
@@ -14,7 +15,7 @@ send_your_packages <- function(){
 2: Do not install it
 ")
 		if(askInst==1){
-			install.packages('mailR')
+			utils::install.packages('mailR')
 			 if (requireNamespace("mailR", quietly = TRUE)) {
 				print('Succesfully installed!')
 			} else {

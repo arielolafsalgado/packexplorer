@@ -3,9 +3,6 @@
 #' Obtain a graph induced by the packages containing certain expression in their description. The expression is matched using agrep.
 #' @param expression The expression of interest 
 #' @param plot.it Should the graph be plotted? Default is FALSE
-#' @param max.distance passed to agrep
-#' @param ignore.case passed to agrep
-#' @param fixed passed to agrep
 #' @param first.neighbors Should the first neighbors be added to the graph? Default is FALSE
 #' @param generate_output Should graph objects be retrieved? Default is TRUE
 #' @param point.size The packages attribute which defines their size. If 'score', their size is defines based on their score. If 'downloads', their size is based on their daily downloads. Otherwise it is the same size for all of them.
@@ -17,19 +14,19 @@
 #' @examples
 #' expression = 'information'
 #' expre2graph(expression)
-#' @importFrom igraph induced_subgraph layout_nicely V "%<-%"
+#' @importFrom igraph induced_subgraph layout_nicely V "%<-%" "V<-"
 #' @importFrom leaflet leaflet addPolylines addCircleMarkers addLegend "%>%"
 #' @importFrom stringr str_trim str_split
 #' @importFrom htmltools HTML
 
 expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_output=TRUE,point.size='downloads',min.point.size=15,max.point.size=30,nwords=5){
-	data('des')
-	data('cats')
-	data('downloads')
-	data('dependsGraph')
-	data('suggestsGraph')	
-	data('importsGraph')
-	data('enhancesGraph')
+#	utils::data('des',envir=environment())
+#	utils::data('cats',envir=environment())
+#	utils::data('downloads',envir=environment())
+#	utils::data('dependsGraph',envir=environment())
+#	utils::data('suggestsGraph',envir=environment())	
+#	utils::data('importsGraph',envir=environment())
+#	utils::data('enhancesGraph',envir=environment())
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
@@ -62,7 +59,7 @@ expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_
 
 		g = induced_subgraph(graph = igraph::union(igraph::union(igraph::union(gs,gd),gi),ge), vids = nodes_expre)
 		V(g)$color = 'black'
-		V(g)$color[is.element(V(g)$name,row.names(installed.packages()))] = 'white'
+		V(g)$color[is.element(V(g)$name,row.names(utils::installed.packages()))] = 'white'
 
 	}
 	else{
@@ -78,7 +75,7 @@ expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_
 		V(g)$color[is.element(V(g)$name,nodes_neigh_gd) & !is.element(V(g)$name,nodes_expre)] = 'blue'
 		V(g)$color[is.element(V(g)$name,nodes_neigh_ge) & !is.element(V(g)$name,nodes_expre)] = 'orange'
 		V(g)$color[is.element(V(g)$name,nodes_neigh_gi) & !is.element(V(g)$name,nodes_expre)] = 'green'
-		V(g)$color[is.element(V(g)$name,row.names(installed.packages()))] = 'white'
+		V(g)$color[is.element(V(g)$name,row.names(utils::installed.packages()))] = 'white'
 	}
 	categorias_g = cats$Category[is.element(cats$Package,V(g)$name)]
 	output$cat_pres = table(str_trim(unlist(str_split(categorias_g,','))))
@@ -93,7 +90,7 @@ expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_
 
 	if(point.size=='score'){
 		g1 = V(g)$name
-		g2 = row.names(installed.packages())
+		g2 = row.names(utils::installed.packages())
 		scores = number_of_conecting_edges(g,g1,g2)
 		scores[is.element(names(scores),g2)]=0
 		radii = min.point.size+(max.point.size-min.point.size)*as.numeric(ifelse(is.na(scores),0,scores)/ifelse(is.finite(max(scores,na.rm=T)),max(scores,na.rm=T),1))

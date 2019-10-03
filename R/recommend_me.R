@@ -13,15 +13,17 @@
 #' @importMethodsFrom Matrix %*%
 #' @export
 #' @examples
-#' pack_list = recommend.me(graph.dep,graph.sug)
+#' \dontrun{
+#' pack_list = recommend.me()
 #' install.packages(names(pack_list)[1])
-#' importFrom igraph V induced_subgraph degree
+#' }
+#' @importFrom igraph V induced_subgraph degree
 
-recommend.me <- function(relationship='suggests',my_packs = rownames(installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
-	data('dependsGraph')
-	data('suggestsGraph')
-	data('enhancesGraph')
-	data('importsGraph')
+recommend.me <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
+#	utils::data('dependsGraph',envir=environment())
+#	utils::data('suggestsGraph',envir=environment())
+#	utils::data('enhancesGraph',envir=environment())
+#	utils::data('importsGraph',envir=environment())
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)	
 	my_packs = intersect(my_packs,V(G)$name)
 	VM = voting_matrix(G,my_packs,kind.of)

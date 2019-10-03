@@ -2,18 +2,15 @@
 #'
 #' This functions help manage the text in the leaflet plotting
 #' @param graph The graph to be plotted.
-#' @param layout The layout of the graph 
-#' @param text The text to be parsed.
 #' @param nwords The number of words per line.
-#' @param pack The package of interest
 #' @return Multiple values depending on function
 #' 
 #' @export
 #' @examples
-#' importsFrom igraph V
+#' @importFrom igraph V
 generate_labels <- function(graph,nwords=15){
-	data('des')
-	data('cats')
+#	utils::data('des',envir=environment())
+#	utils::data('cats',envir=environment())
 	labs <- lapply(1:length(V(graph)), function(i) {
 		pack = V(graph)$name[i]
 		desci = as.character(desc$Description[is.element(desc$Package,pack)])

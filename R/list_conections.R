@@ -3,16 +3,11 @@
 #' This functions help manage the text in the leaflet plotting
 #' @param graph The graph to be plotted.
 #' @param layout The layout of the graph 
-#' @param des The descriptions dataframe.
-#' @param cats The categories dataframe.
-#' @param texto The text to be parsed.
-#' @param nwords The number of words per line.
-#' @param pack The package of interest
 #' @return Multiple values depending on function
 #' 
 #' @export
 #' @examples
-#' importFrom igraph as_edgelist V
+#' @importFrom igraph as_edgelist V
 
 list_conections <- function(graph,layout){
 	connList = NULL

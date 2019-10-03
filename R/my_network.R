@@ -4,16 +4,16 @@
 #' @return A list with igraph objects, one for each input graph.
 #' @export
 #' @examples
-#' g = my_network()
-#' plot(g)
-#' importFrom igraph induced_subgraph V
+#' g_list = my_network()
+#' plot(g_list[['Sug']])
+#' @importFrom igraph induced_subgraph V
 
 my_network <- function(){
-	data('dependsGraph')
-	data('suggestsGraph')	
-	data('importsGraph')
-	data('enhancesGraph')	
-	my_packs = rownames(installed.packages())
+#	utils::data('dependsGraph',envir=environment())
+#	utils::data('suggestsGraph',envir=environment())	
+#	utils::data('importsGraph',envir=environment())
+#	utils::data('enhancesGraph',envir=environment())	
+	my_packs = rownames(utils::installed.packages())
 	return(list(
 		'Sug'= induced_subgraph(gs,V(gs)[is.element(V(gs)$name,my_packs)]),
 		'Dep' = induced_subgraph(gd,V(gd)[is.element(V(gd)$name,my_packs)]),

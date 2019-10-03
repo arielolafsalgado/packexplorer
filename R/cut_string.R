@@ -1,20 +1,17 @@
 #' Auxiliary functions for the leaflet plotting
 #'
 #' These functions help to manage the text in the leaflet plotting
-#' @param graph The graph to be plotted.
-#' @param layout The layout of the graph 
 #' @param text The text to be parsed.
 #' @param nwords The number of words per line.
-#' @param pack The package of interest
 #' @return Multiple values depending on the function
 #' 
 #' @export
 #' @examples
 #' @importFrom stringr str_split
 cut_string <- function(text,nwords=15){
-	data('des')
-	data('cats')
-	data('downloads')
+#	utils::data('des',envir=environment())
+#	utils::data('cats',envir=environment())
+#	utils::data('downloads',envir=environment())
 	if(is.null(text)) text = ''
 	if(length(text)==0) text = ''
 	sst <- str_split(text, " ")[[1]]
@@ -28,7 +25,7 @@ cut_string <- function(text,nwords=15){
 	end = nwords
 	final.word=''
 	for(i in 1:q){
-		word <- paste(na.exclude(sst[begin:end]),collapse=' ')
+		word <- paste(stats::na.exclude(sst[begin:end]),collapse=' ')
 		final.word = paste(final.word,word,sep='<br/>')
 		begin = begin + nwords
 		end = end + nwords

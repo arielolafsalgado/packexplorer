@@ -10,11 +10,13 @@
 #' @importMethodsFrom Matrix %*%
 #' @export
 #' @examples
-#' X = voting_matrix(G,my_packs,kind.of='to_packages')
-#' importFrom igraph as_adjacency_matrix induced_subgraph neighborhood V as.undirected
-#' importFrom Matrix t
+#' gs = my_network()[['Sug']]
+#' pack = my_packages()[1]
+#' X = voting_matrix(gs,my_packs=pack)
+#' @importFrom igraph as_adjacency_matrix induced_subgraph neighborhood V as.undirected
+#' @importFrom Matrix t
 
-voting_matrix <- function(G,my_packs=row.names(installed.packages()),kind.of='to_packages'){
+voting_matrix <- function(G,my_packs=row.names(utils::installed.packages()),kind.of='to_packages'){
 	dir = switch(kind.of,'to_packages'='in','from_packages'='out','all'='all')
 	my_packs = intersect(my_packs,V(G)$name)
 	packs = unique(names(unlist(neighborhood(G,mode=dir,nodes = my_packs,order=1))))

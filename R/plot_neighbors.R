@@ -13,19 +13,19 @@
 #' @return A list with packages and scores for each one.
 #' @export
 #' @examples
-#' plot_neighbors(gs,point.size='score',downloads=downloads)
-#' importFrom igraph V neighborhood induced_subraph layout_nicely
-#' importFrom htmltools HTML
-#' importFrom leaflet leaflet addCircleMarkers addPolylines addLegend
+#' plot_neighbors()
+#' @importFrom igraph V neighborhood induced_subgraph layout_nicely "V<-"
+#' @importFrom htmltools HTML
+#' @importFrom leaflet leaflet addCircleMarkers addPolylines addLegend
 
-plot_neighbors <- function(relationship='suggests',my_packs = rownames(installed.packages()),kind.of='to_packages',order=1,point.size='score',apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
-	data('des')
-	data('cats')
-	data('downloads')
-	data('dependsGraph')
-	data('suggestsGraph')	
-	data('importsGraph')
-	data('enhancesGraph')
+plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
+#	utils::data('des',envir=environment())
+#	utils::data('cats',envir=environment())
+#	utils::data('downloads',envir=environment())
+#	utils::data('dependsGraph',envir=environment())
+#	utils::data('suggestsGraph',envir=environment())	
+#	utils::data('importsGraph',envir=environment())
+#	utils::data('enhancesGraph',envir=environment())
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
