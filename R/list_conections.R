@@ -12,22 +12,22 @@
 #' 
 #' @export
 #' @examples
-
+#' importFrom igraph as_edgelist V
 
 list_conections <- function(graph,layout){
-	lista = NULL
-	lista_ejes = as_edgelist(graph=graph)
-	for(k in 1:nrow(lista_ejes)){
-		v1 = lista_ejes[k,1]
-		v2 = lista_ejes[k,2]
+	connList = NULL
+	edgeList = as_edgelist(graph=graph)
+	for(k in 1:nrow(edgeList)){
+		v1 = edgeList[k,1]
+		v2 = edgeList[k,2]
 		lv1 = is.element(V(graph)$name,v1)
 		lv2 = is.element(V(graph)$name,v2)
-		lista = rbind(lista,layout[lv1,])
-		lista = rbind(lista,layout[lv2,])
-		lista = rbind(lista,c(NA,NA))
+		connList = rbind(connList,layout[lv1,])
+		connList = rbind(connList,layout[lv2,])
+		connList = rbind(connList,c(NA,NA))
 	}
-	colnames(lista) = c("x","y")
-	return(as.data.frame(lista))
+	colnames(connList) = c("x","y")
+	return(as.data.frame(connList))
 
 }
 
