@@ -11,13 +11,18 @@
 #' @param point.size The packages attribute which defines their size. If 'score', their size is defines based on their score. If 'downloads', their size is based on their daily downloads. Otherwise it is the same size for all of them.
 #' @param min.point.size The min point size, passed to leaflet. Default is 15
 #' @param max.point.size The max point size, passed to leaflet. Default is 30
+#' @param nwords Number of words per line in the description of the package
 #' @return Graph plot in leaflet, and an igraph object.
 #' @export
 #' @examples
 #' expression = 'information'
 #' expre2graph(expression)
+#' @importFrom igraph induced_subgraph layout_nicely V "%<-%"
+#' @importFrom leaflet leaflet addPolylines addCircleMarkers addLegend "%>%"
+#' @importFrom stringr str_trim str_split
+#' @importFrom htmltools HTML
 
-expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_output=TRUE,point.size='downloads',nwords=5,min.point.size=15,max.point.size=30){
+expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_output=TRUE,point.size='downloads',min.point.size=15,max.point.size=30,nwords=5){
 	data('des')
 	data('cats')
 	data('downloads')
@@ -28,51 +33,51 @@ expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,generate_
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
-	ladesc <- tolower(as.character(desc$Description))
-	cuales <- grep(tolower(expression), ladesc,ignore.case = T)
-	if(length(cuales)==0) return('No package found')
-	nodos_expre <- desc$Package[cuales]
-	nodos_vecinos_gd <- NULL 
-	nodos_vecinos_gs <- NULL 
-	nodos_vecinos_ge <- NULL 
-	nodos_vecinos_gi <- NULL 
-	for(idx in cuales){
-		nodos_vecinos_gd = c(nodos_vecinos_gd,neighbors(graph = gd, v = desc$Package[idx],mode='all'))
-		nodos_vecinos_ge = c(nodos_vecinos_ge,neighbors(graph = ge, v = desc$Package[idx],mode='all'))
-		nodos_vecinos_gi = c(nodos_vecinos_gi,neighbors(graph = gi, v = desc$Package[idx],mode='all'))
-		nodos_vecinos_gs = c(nodos_vecinos_gs,neighbors(graph = gs, v = desc$Package[idx],mode='all'))
+	the.desc <- tolower(as.character(desc$Description))
+	which.packs <- grep(tolower(expression), the.desc,ignore.case = T)
+	if(length(which.packs)==0) return('No package found')
+	nodes_expre <- desc$Package[which.packs]
+	nodes_neigh_gd <- NULL 
+	nodes_neigh_gs <- NULL 
+	nodes_neigh_ge <- NULL 
+	nodes_neigh_gi <- NULL 
+	for(idx in which.packs){
+		nodes_neigh_gd = c(nodes_neigh_gd,neighbors(graph = gd, v = desc$Package[idx],mode='all'))
+		nodes_neigh_ge = c(nodes_neigh_ge,neighbors(graph = ge, v = desc$Package[idx],mode='all'))
+		nodes_neigh_gi = c(nodes_neigh_gi,neighbors(graph = gi, v = desc$Package[idx],mode='all'))
+		nodes_neigh_gs = c(nodes_neigh_gs,neighbors(graph = gs, v = desc$Package[idx],mode='all'))
 	}
 
-	nodos_vecinos_gd <- unique(names(nodos_vecinos_gd)) 
-	nodos_vecinos_ge <- unique(names(nodos_vecinos_ge)) 
-	nodos_vecinos_gi <- unique(names(nodos_vecinos_gi)) 
-	nodos_vecinos_gs <- unique(names(nodos_vecinos_gs)) 
+	nodes_neigh_gd <- unique(names(nodes_neigh_gd)) 
+	nodes_neigh_ge <- unique(names(nodes_neigh_ge)) 
+	nodes_neigh_gi <- unique(names(nodes_neigh_gi)) 
+	nodes_neigh_gs <- unique(names(nodes_neigh_gs)) 
 	output = list()
-	output$nmenciones = length(cuales)
+	output$nmentions = length(which.packs)
 	if(!first.neighbors){
-		gs_vecindario = induced_subgraph(graph = gs, vids = desc$Package[cuales])
-		gd_vecindario = induced_subgraph(graph = gd, vids = desc$Package[cuales])
-		ge_vecindario = induced_subgraph(graph = ge, vids = desc$Package[cuales])
-		gi_vecindario = induced_subgraph(graph = gi, vids = desc$Package[cuales])
+		gs_neighborhood = induced_subgraph(graph = gs, vids = desc$Package[which.packs])
+		gd_neighborhood = induced_subgraph(graph = gd, vids = desc$Package[which.packs])
+		ge_neighborhood = induced_subgraph(graph = ge, vids = desc$Package[which.packs])
+		gi_neighborhood = induced_subgraph(graph = gi, vids = desc$Package[which.packs])
 
-		g = igraph::induced_subgraph(graph = igraph::union(igraph::union(igraph::union(gs,gd),gi),ge), vids = nodos_expre)
+		g = induced_subgraph(graph = igraph::union(igraph::union(igraph::union(gs,gd),gi),ge), vids = nodes_expre)
 		V(g)$color = 'black'
 		V(g)$color[is.element(V(g)$name,row.names(installed.packages()))] = 'white'
 
 	}
 	else{
-		gs_vecindario = induced_subgraph(graph = gs, vids = union(nodos_expre,nodos_vecinos_gs))
-		gd_vecindario = induced_subgraph(graph = gd, vids = union(nodos_expre,nodos_vecinos_gd))
-		ge_vecindario = induced_subgraph(graph = ge, vids = union(nodos_expre,nodos_vecinos_ge))
-		gi_vecindario = induced_subgraph(graph = gi, vids = union(nodos_expre,nodos_vecinos_gi))
+		gs_neighborhood = induced_subgraph(graph = gs, vids = union(nodes_expre,nodes_neigh_gs))
+		gd_neighborhood = induced_subgraph(graph = gd, vids = union(nodes_expre,nodes_neigh_gd))
+		ge_neighborhood = induced_subgraph(graph = ge, vids = union(nodes_expre,nodes_neigh_ge))
+		gi_neighborhood = induced_subgraph(graph = gi, vids = union(nodes_expre,nodes_neigh_gi))
 
-		g = induced_subgraph(graph = igraph::union(igraph::union(igraph::union(gs,gd),gi),ge), vids = c(nodos_expre,nodos_vecinos_gd,nodos_vecinos_gs,nodos_vecinos_ge,nodos_vecinos_gi))
+		g = induced_subgraph(graph = igraph::union(igraph::union(igraph::union(gs,gd),gi),ge), vids = c(nodes_expre,nodes_neigh_gd,nodes_neigh_gs,nodes_neigh_ge,nodes_neigh_gi))
 
 		V(g)$color = 'black'
-		V(g)$color[is.element(V(g)$name,nodos_vecinos_gs) & !is.element(V(g)$name,nodos_expre)] = 'red'
-		V(g)$color[is.element(V(g)$name,nodos_vecinos_gd) & !is.element(V(g)$name,nodos_expre)] = 'blue'
-		V(g)$color[is.element(V(g)$name,nodos_vecinos_ge) & !is.element(V(g)$name,nodos_expre)] = 'orange'
-		V(g)$color[is.element(V(g)$name,nodos_vecinos_gi) & !is.element(V(g)$name,nodos_expre)] = 'green'
+		V(g)$color[is.element(V(g)$name,nodes_neigh_gs) & !is.element(V(g)$name,nodes_expre)] = 'red'
+		V(g)$color[is.element(V(g)$name,nodes_neigh_gd) & !is.element(V(g)$name,nodes_expre)] = 'blue'
+		V(g)$color[is.element(V(g)$name,nodes_neigh_ge) & !is.element(V(g)$name,nodes_expre)] = 'orange'
+		V(g)$color[is.element(V(g)$name,nodes_neigh_gi) & !is.element(V(g)$name,nodes_expre)] = 'green'
 		V(g)$color[is.element(V(g)$name,row.names(installed.packages()))] = 'white'
 	}
 	categorias_g = cats$Category[is.element(cats$Package,V(g)$name)]
