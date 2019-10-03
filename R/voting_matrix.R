@@ -11,14 +11,16 @@
 #' @export
 #' @examples
 #' X = voting_matrix(G,my_packs,kind.of='to_packages')
+#' importFrom igraph as_adjacency_matrix induced_subgraph neighborhood V as.undirected
+#' importFrom Matrix t
 
 voting_matrix <- function(G,my_packs=row.names(installed.packages()),kind.of='to_packages'){
 	dir = switch(kind.of,'to_packages'='in','from_packages'='out','all'='all')
 	my_packs = intersect(my_packs,V(G)$name)
 	packs = unique(names(unlist(neighborhood(G,mode=dir,nodes = my_packs,order=1))))
-	g = igraph::induced_subgraph(G,packs)
-	if(dir=='all') g = igraph::as.undirected(g)
-	X = igraph::as_adjacency_matrix(g)
+	g = induced_subgraph(G,packs)
+	if(dir=='all') g = as.undirected(g)
+	X = as_adjacency_matrix(g)
 	for(p in setdiff(packs,my_packs)){
 		if(dir=='in'){
 			X[,p] = 0 #Hago que el grado de entrada sea cero
@@ -31,7 +33,7 @@ voting_matrix <- function(G,my_packs=row.names(installed.packages()),kind.of='to
 		}
 		X[p,p] = 1
 	}
-	if(dir=='in') X = Matrix::t(X)
+	if(dir=='in') X = t(X)
 	for(i in 1:nrow(X)){
 		X[i,] = X[i,]/max(sum(X[i,]),1)
 	}
