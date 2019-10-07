@@ -9,17 +9,14 @@
 #' @examples
 #' @importFrom stringr str_split
 cut_string <- function(text,nwords=15){
-#	utils::data('des',envir=environment())
-#	utils::data('cats',envir=environment())
-#	utils::data('downloads',envir=environment())
 	if(is.null(text)) text = ''
 	if(length(text)==0) text = ''
+	if(any(is.na(text))) text = ''
 	sst <- str_split(text, " ")[[1]]
 	sst = gsub(pattern='<p>|</p>',replacement = '', x= sst)
+	sst = sst[sst!='']
+	if(nwords<1 | nwords>length(sst)) return(text)
 	n = length(sst)
-	if(n<nwords){
-		return(text)
-	}
 	q = as.integer(n/nwords) + 1	
 	begin= 1
 	end = nwords

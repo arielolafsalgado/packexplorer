@@ -43,7 +43,6 @@ recommend.me <- function(relationship='suggests',my_packs = rownames(utils::inst
 		score = score/sum(score)
 	}
 	output = sort(score,decreasing=TRUE)
-	if(is.null(nMax)) nMax = length(output)
-	return(output[1:nMax])
+	return(output[1:min(nMax,length(output))])
 }
 

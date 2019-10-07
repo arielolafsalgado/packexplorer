@@ -7,8 +7,8 @@
 plot_neighbors(relationship = "suggests",
   my_packs = rownames(utils::installed.packages()),
   kind.of = "to_packages", order = 1, point.size = "score",
-  apply.degree.filter = F, nwords = 5, min.point.size = 15,
-  max.point.size = 30)
+  return.map = T, plot.it = F, apply.degree.filter = F, nwords = 5,
+  min.point.size = 15, max.point.size = 30)
 }
 \arguments{
 \item{relationship}{The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'.}
@@ -20,6 +20,10 @@ plot_neighbors(relationship = "suggests",
 \item{order}{The order of the neighborhood. It has to be equal or bigger than zero.}
 
 \item{point.size}{The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them.}
+
+\item{return.map}{Should the leaflet and igraph object be returned?}
+
+\item{plot.it}{Should the leaflet object be printed?}
 
 \item{apply.degree.filter}{If TRUE, the score of each package is multiplied by the fraction of its edges that conect to my_packs.}
 

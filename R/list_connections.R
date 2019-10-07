@@ -9,7 +9,7 @@
 #' @examples
 #' @importFrom igraph as_edgelist V
 
-list_conections <- function(graph,layout){
+list_connections <- function(graph,layout){
 	connList = NULL
 	edgeList = as_edgelist(graph=graph)
 	for(k in 1:nrow(edgeList)){

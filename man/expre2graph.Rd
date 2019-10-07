@@ -5,8 +5,8 @@
 \title{Discover new packages, related to the ones you have}
 \usage{
 expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
-  generate_output = TRUE, point.size = "downloads",
-  min.point.size = 15, max.point.size = 30, nwords = 5)
+  return.map = TRUE, point.size = "downloads", min.point.size = 15,
+  max.point.size = 30, nwords = 5)
 }
 \arguments{
 \item{expression}{The expression of interest}
@@ -15,8 +15,6 @@ expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
 
 \item{first.neighbors}{Should the first neighbors be added to the graph? Default is FALSE}
 
-\item{generate_output}{Should graph objects be retrieved? Default is TRUE}
-
 \item{point.size}{The packages attribute which defines their size. If 'score', their size is defines based on their score. If 'downloads', their size is based on their daily downloads. Otherwise it is the same size for all of them.}
 
 \item{min.point.size}{The min point size, passed to leaflet. Default is 15}
@@ -24,6 +22,8 @@ expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
 \item{max.point.size}{The max point size, passed to leaflet. Default is 30}
 
 \item{nwords}{Number of words per line in the description of the package}
+
+\item{return_map}{Should graph objects be retrieved? Default is TRUE}
 }
 \value{
 Graph plot in leaflet, and an igraph object.

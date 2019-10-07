@@ -14,5 +14,5 @@ This function gives you your own package network, based on the avaiable general 
 }
 \examples{
 g_list = my_network()
-plot(g_list[['Sug']])
+plot(g_list[['Suggests']])
 }

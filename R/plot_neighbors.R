@@ -5,6 +5,8 @@
 #' @param my_packs The packages that you are interested to use as reference. Default is your installed packages
 #' @param kind.of The direction of the relations. If you want packages recommending my_packs, it should be "to_packages", and if you want packages recommended by my_packs, it should be "from_packages". It can also be "all".
 #' @param order The order of the neighborhood. It has to be equal or bigger than zero. 
+#' @param return.map Should the leaflet and igraph object be returned?
+#' @param plot.it Should the leaflet object be printed?
 #' @param nwords The number of words appearing in the description of the package, per row.
 #' @param point.size The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them.
 #' @param min.point.size The min point size, passed to leaflet. Default is 15
@@ -18,14 +20,7 @@
 #' @importFrom htmltools HTML
 #' @importFrom leaflet leaflet addCircleMarkers addPolylines addLegend
 
-plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
-#	utils::data('des',envir=environment())
-#	utils::data('cats',envir=environment())
-#	utils::data('downloads',envir=environment())
-#	utils::data('dependsGraph',envir=environment())
-#	utils::data('suggestsGraph',envir=environment())	
-#	utils::data('importsGraph',envir=environment())
-#	utils::data('enhancesGraph',envir=environment())
+plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',return.map =T, plot.it = F,apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
@@ -43,7 +38,7 @@ plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::in
 		V(g)$score[match(names(scores),V(g)$name)] = scores
 	}
 	l = scale(layout_nicely(g))
-	listConections = list_conections(graph = g,layout = l)
+	listConnections = list_connections(graph = g,layout = l)
 	labs = generate_labels(graph=g,nwords=nwords)
 
 	if(point.size=='score'){
@@ -64,8 +59,12 @@ plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::in
 	}
 	coloresMapV = c('white','black')
 	labelsMapV = c('Your own packages','Neighbor packages')
-	map <- leaflet() %>% addPolylines(data=listConections,lng=~x,lat = ~y,weight=2,color='gray') %>% addCircleMarkers(lng=l[,1],lat = l[,2],label=labels,color=V(g)$color,radius=radii,opacity=1,fillOpacity=1) %>% addLegend(colors=coloresMapV,labels=labelsMapV)
-		return(map)
+	map <- leaflet(data=l) %>% addPolylines(data=listConnections,lng=~x,lat = ~y,weight=2,color='gray') %>% addCircleMarkers(lng=l[,1],lat = l[,2],label=labels,color=V(g)$color,radius=radii,opacity=1,fillOpacity=1) %>% addLegend(colors=coloresMapV,labels=labelsMapV)
+	output = list()
+	output$leaflet.graph = map
+	output$igraph.graph = g
+	if(plot.it) print(map)
+	if(return.map ) return(output)
 
 }
 

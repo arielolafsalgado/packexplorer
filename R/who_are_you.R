@@ -12,18 +12,11 @@
 #' @return A dataframe and also a plot.
 #' @export
 #' @examples
-#' who.are.you('leaflet')
+#' who_are_you('leaflet')
 #' @importFrom igraph V neighbors induced_subgraph E %<-% as_ids layout_nicely head_of tail_of E<- V<-
 #' @importFrom leaflet leaflet addCircleMarkers addPolylines addLegend addLabelOnlyMarkers labelOptions
 
-who.are.you <- function(pack,plot.it = TRUE,nwords=5,add_my_packs=FALSE,my_packs_neighbors=FALSE,point.size='downloads',min.point.size=15,max.point.size=30){
-#	utils::data('des',envir=environment())
-#	utils::data('cats',envir=environment())
-#	utils::data('downloads',envir=environment())
-#	utils::data('dependsGraph',envir=environment())
-#	utils::data('suggestsGraph',envir=environment())	
-#	utils::data('importsGraph',envir=environment())
-#	utils::data('enhancesGraph',envir=environment())	
+who_are_you <- function(pack,plot.it = TRUE,return.map = F,nwords=5,add_my_packs=FALSE,my_packs_neighbors=FALSE,point.size='downloads',min.point.size=15,max.point.size=30){
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
@@ -73,15 +66,15 @@ who.are.you <- function(pack,plot.it = TRUE,nwords=5,add_my_packs=FALSE,my_packs
 	E(g)$color[is.element(Eg,Ege) & is.element(tail_of(graph = g, es = E(g))$name, pack)] = 'yellow'
 	E(g)$color[is.element(Eg,Ege) & is.element(head_of(graph = g, es = E(g))$name, pack)] = 'violet'
 	output = list()
-	output$graph = g
+	output$igraph.graph = g
 	l = scale(layout_nicely(g))
-	listConections = list_conections(graph = g,layout = l)
+	listConnections = list_connections(graph = g,layout = l)
 	labs = generate_labels(graph=g,nwords=nwords)
 
 	if(point.size=='score'){
 		g1 = V(g)$name
 		g2 = row.names(utils::installed.packages())
-		scores = number_of_conecting_edges(g,g1,g2)
+		scores = number_of_connecting_edges(g,g1,g2)
 		scores[is.element(names(scores),g2)]=0
 		radii = min.point.size+(max.point.size-min.point.size)*as.numeric(ifelse(is.na(scores),0,scores)/max(c(scores,1),na.rm=T))
 		labels = lapply(1:length(V(g)), function(i){paste(labs[[i]],' <p>','Score: ',scores[i],'</p>',sep='')})
@@ -106,13 +99,13 @@ who.are.you <- function(pack,plot.it = TRUE,nwords=5,add_my_packs=FALSE,my_packs
 	}
 	coloresMapE = c('red','orange','blue','green','pink','brown','yellow','violet','gray')
 	labelsMapE = c(paste('suggests to',pack),paste(pack,'suggests to'),paste('deppends from',pack),paste(pack,'deppends from'),paste('imports',pack),paste(pack,'imports'),paste('enhances',pack),paste(pack,'enhances'),'other')
-	map <- leaflet() %>% addPolylines(data=listConections,lng=~x,lat = ~y,weight=2,color=E(g)$color) %>% addCircleMarkers(lng=l[,1],lat = l[,2],label=labels,color=V(g)$color,radius=radii,opacity=1,fillOpacity=1) %>%
+	map <- leaflet(data=l) %>% addPolylines(data=listConnections,lng=~x,lat = ~y,weight=2,color=E(g)$color) %>% addCircleMarkers(lng=l[,1],lat = l[,2],label=labels,color=V(g)$color,radius=radii,opacity=1,fillOpacity=1) %>%
 	addLegend(colors=coloresMapV,labels=labelsMapV) %>% addLegend(colors=coloresMapE,labels=labelsMapE) %>%
 	addLabelOnlyMarkers(lng=l[,1],lat = l[,2],label=V(g)$name,labelOptions=labelOptions(textsize='8px'))
-	output$leafletGraph = map
+	output$leaflet.graph = map
 	if(plot.it){
 		print(map)
 	}
-	return(output)
+	if(return.map) return(output)
 }
 

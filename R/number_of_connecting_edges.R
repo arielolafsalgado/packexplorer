@@ -8,7 +8,7 @@
 #' @export
 #' @importFrom igraph neighbors
 
-number_of_conecting_edges <- function(g,group1,group2,mode='all'){
+number_of_connecting_edges <- function(g,group1,group2,mode='all'){
 	aux = rep(NA,length(group1))
 	names(aux) = group1
 	for(g1 in group1){
