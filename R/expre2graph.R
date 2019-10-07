@@ -4,7 +4,7 @@
 #' @param expression The expression of interest 
 #' @param plot.it Should the graph be plotted? Default is FALSE
 #' @param first.neighbors Should the first neighbors be added to the graph? Default is FALSE
-#' @param return_map Should graph objects be retrieved? Default is TRUE
+#' @param return.map Should graph objects be retrieved? Default is TRUE
 #' @param point.size The packages attribute which defines their size. If 'score', their size is defines based on their score. If 'downloads', their size is based on their daily downloads. Otherwise it is the same size for all of them.
 #' @param min.point.size The min point size, passed to leaflet. Default is 15
 #' @param max.point.size The max point size, passed to leaflet. Default is 30

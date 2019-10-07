@@ -10,7 +10,7 @@
 #' @importMethodsFrom Matrix %*%
 #' @export
 #' @examples
-#' gs = my_network()[['Sug']]
+#' gs = my_network()[['Suggests']]
 #' pack = my_packages()[1]
 #' X = voting_matrix(gs,my_packs=pack)
 #' @importFrom igraph as_adjacency_matrix induced_subgraph neighborhood V as.undirected

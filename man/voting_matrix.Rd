@@ -21,7 +21,7 @@ A list with packages and scores for each one.
 This function creates the voting matrix from your packages and the package graph.
 }
 \examples{
-gs = my_network()[['Sug']]
+gs = my_network()[['Suggests']]
 pack = my_packages()[1]
 X = voting_matrix(gs,my_packs=pack)
 }

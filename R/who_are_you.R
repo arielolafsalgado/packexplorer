@@ -3,6 +3,7 @@
 #' This function gives you an ego network of a package (the package and its surrounders).
 #' @param pack The package of interest.
 #' @param plot.it Should the network be plotted? Default is TRUE
+#' @param return.map Should the network be returned? Default is FALSE
 #' @param point.size The aspect of the packages giving their size. If 'score', their size is given based in their score. If 'downloads', their size is base in ther daily downloads. Else its the same for all of them. If you want to specify a size use min.point.size
 #' @param add_my_packs Should your packages be added to the plot? Default is FALSE
 #' @param my_packs_neighbors If add_my_packs is TRUE, should only keep the surrounders of pack? Default is FALSE

@@ -13,6 +13,8 @@ who_are_you(pack, plot.it = TRUE, return.map = F, nwords = 5,
 
 \item{plot.it}{Should the network be plotted? Default is TRUE}
 
+\item{return.map}{Should the network be returned? Default is FALSE}
+
 \item{nwords}{The number of words per line in the package's description}
 
 \item{add_my_packs}{Should your packages be added to the plot? Default is FALSE}
