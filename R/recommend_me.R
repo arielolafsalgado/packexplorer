@@ -14,12 +14,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' pack_list = recommend.me()
+#' pack_list = recommend_me()
 #' install.packages(names(pack_list)[1])
 #' }
 #' @importFrom igraph V induced_subgraph degree
 
-recommend.me <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
+recommend_me <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
 #	utils::data('dependsGraph',envir=environment())
 #	utils::data('suggestsGraph',envir=environment())
 #	utils::data('enhancesGraph',envir=environment())

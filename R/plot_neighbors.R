@@ -30,7 +30,7 @@ plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::in
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)
 	neighs = unique(names(unlist(neighborhood(G,mode=dir,nodes = my_packs,order=order))))
 	g = induced_subgraph(G,neighs)
-	scores = recommend.me(relationship=relationship,my_packs=my_packs,kind.of=kind.of,apply.degree.filter=apply.degree.filter)
+	scores = recommend_me(relationship=relationship,my_packs=my_packs,kind.of=kind.of,apply.degree.filter=apply.degree.filter)
 	V(g)$color = 'black'
 	V(g)$color[is.element(V(g)$name,my_packs)] = 'white'
 	V(g)$score = 0
