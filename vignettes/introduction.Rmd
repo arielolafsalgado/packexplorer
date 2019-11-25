@@ -68,14 +68,14 @@ Using plot_neighbors you can see new (not yet installed) packages, you can look 
 plot_neighbors(my_packs=my_packages(),point.size='downloads',order=1) 
 ```
 
-But maybe you prefer to base your choice on the functional relation between the new packages and the older ones. In this case, packexplorer provides you with the function `give.me.one` which gives you a recommendation about what package to install, based on a relation type. You can also specify if you want the new package to point to your installed packages, suggesting as many as possible of them, or the opposite: to find the package that is most recommended from your packages.
+But maybe you prefer to base your choice on the functional relation between the new packages and the older ones. In this case, packexplorer provides you with the function `recommend_me` which gives you a recommendation list about what package to install, based on a relation type. You can also specify if you want the new package to point to your installed packages, suggesting as many as possible of them, or the opposite: to find the package that is most recommended from your packages.
 
 ```
 # Suggesting your packages:
-give.me.one(relationship='suggests',kind.of='to_packages')
+recommend_me(relationship='suggests',kind.of='to_packages')
 
 # Suggested by your packages:
-give.me.one(relationship='suggests',kind.of='from_packages')
+recommend_me(relationship='suggests',kind.of='from_packages')
 ```
 
 packexplorer assigns a score based on the number of connections between your packages and the neighborhood. You can also use this score to visualize the neighborhood in `plot_neighbors`:
@@ -85,10 +85,10 @@ plot_neighbors(relationship='suggests',my_packs=my_packages(),order=1,point.size
 ```
 
 ## Aditional exploratory functions
-Suppose that `give.me.one` tells you to install `ggplot2`, and you want to know more about this package. You can gain knowledge looking at what packages connect with it. For this, packexplorer provides the function `who.are.you`, which tells you what packages, and what relations are connected with the packages of your interest.
+Suppose that `recommend_me` tells you to install `ggplot2`, and you want to know more about this package. You can gain knowledge looking at what packages connect with it. For this, packexplorer provides the function `who_are_you`, which tells you what packages, and what relations are connected with the packages of your interest.
 
 ```
-who_are_you('ggplot2',plot.it=T,on.leaflet=T,facts=F,point.size='downloads')
+who_are_you('ggplot2',point.size='downloads')
 ```
 
 Again, you can specify different mechanisms to assign the size of the circles.
