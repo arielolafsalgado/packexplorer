@@ -16,6 +16,6 @@ devtools::install_github("arielolafsalgado/packexplorer")
 Start trying out
 ```
 plot_neighbors()
-who.are.you('leaflet')
+who_are_you('leaflet')
 expre2graph('info')
 ```

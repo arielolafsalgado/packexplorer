@@ -88,7 +88,7 @@ plot_neighbors(relationship='suggests',my_packs=my_packages(),order=1,point.size
 Suppose that `give.me.one` tells you to install `ggplot2`, and you want to know more about this package. You can gain knowledge looking at what packages connect with it. For this, packexplorer provides the function `who.are.you`, which tells you what packages, and what relations are connected with the packages of your interest.
 
 ```
-who.are.you('ggplot2',plot.it=T,on.leaflet=T,facts=F,point.size='downloads')
+who_are_you('ggplot2',plot.it=T,on.leaflet=T,facts=F,point.size='downloads')
 ```
 
 Again, you can specify different mechanisms to assign the size of the circles.
