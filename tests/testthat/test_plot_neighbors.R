@@ -10,6 +10,6 @@ test_that("numbers of packages in graph is same my_packages plus recommended pac
     pn = plot_neighbors(return.map=T,plot.it=F)
     g = pn$igraph.graph
     my_packs = my_packages()
-    reco.me = recommend.me()
+    reco.me = recommend_me()
     expect_equal(length(setdiff(V(g)$name,c(my_packs,names(reco.me)))),0)
 })
