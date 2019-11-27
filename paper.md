@@ -48,24 +48,4 @@ Consider that you're interested in new Bayesian methods within the R enviroment,
 </p>
 Figure 1: (Left) Topic network generated with ``expre2graph('bayesian')``. White circles represent already installed packages, and black circles, new packages. Links indicate a dependency relation between nodes. Node 1 is ``rstan``, node 2 is ``mclust`` and node 3 is ``MCMCpack``. (Right) Same network, now with the description of the ``rstan`` package displayed as the user's pointer passes over the node.
 
-
-
-
-
-
-
-# Code Summary
-
-``c14bazAAR`` is an R package that attempts to tackle the problem at hand by providing an independent interface to access radiocarbon data and make it available for a reproducible research process: from modelling to publication to scientific discourse. It queries openly available ^14^C data archives, but not those behind pay- or login-walls.
-
-The package includes download functions (accessible with the main interface `c14bazAAR::get_c14data()`) that -- first of all -- acquire databases from different sources online. They then reduce the tables to a set of common variables and store them in a dedicated R S3 class: `c14_date_list`. The `c14_date_list` is based on `tibble::tibble` to integrate well into the R [tidyverse](https://www.tidyverse.org/) ecosystem. It also establishes standardised data types for the most important variables usually defined to describe radiocarbon data.
-
-Beyond the download functions, ``c14bazAAR`` contains a multitude of useful helpers that can be applied to objects of class `c14_date_list`. These include methods for bulk calibration of radiocarbon dates with the Bchron R package [@Haslett:2008], removal of duplicates, estimation of coordinate precision, or conversion to other useful R data types (e.g. `sf::sf` [@Pebesma:2018]). For the classification of sample material ``c14bazAAR`` provides a manually curated reference list that maps the inconsistent attributions in the source databases to a standardized set of material classes. Such a reference list exists as well to fix the country attribution value of dates -- which is especially important in case of missing coordinate information. Methods to determine the source country based on coordinates fail on such dates.
-
-``c14bazAAR`` was already used for data acquisition and preparation in at least one research paper: @Schmid:2019.
-
-# Acknowledgements
-
-The package got valuable code input from several members of the [ISAAKiel group](https://isaakiel.github.io) (Initiative for Statistical Analysis in Archaeology Kiel), most notably: Daniel Knitter, David Matzig, Wolfgang Hamer, Kay Schmütz and Nils Müller-Scheeßel.
-
 # References
