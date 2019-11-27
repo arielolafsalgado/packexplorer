@@ -23,7 +23,7 @@
 plot_neighbors = function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',return.map =T, plot.it = F,apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
-	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
+	downloads = downloads[is.element(downloads$Package,V(gd)$name),]
 	dir = switch(kind.of,'to_packages'='in','from_packages'='out','all'='all')
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)
 	not_considered_packs = setdiff(my_packs,V(G)$name)
@@ -52,7 +52,7 @@ plot_neighbors = function(relationship='suggests',my_packs = rownames(utils::ins
 		labels = lapply(labels, HTML)
 	}else{
 		if(point.size=='downloads'){
-			desc.rate = downloads$mean.desc[match(V(g)$name,as.character(downloads$paq))]
+			desc.rate = downloads$Downloads[match(V(g)$name,as.character(downloads$Package))]
 			radii = min.point.size + (max.point.size-min.point.size)*desc.rate/max(desc.rate,na.rm=T) 
 			radii[is.na(radii)] = min.point.size
 			labels = lapply(1:length(V(g)), function(i){paste(labs[[i]],' <p>','Downloads rate: ',round(desc.rate[i],3),'</p>',sep='')})

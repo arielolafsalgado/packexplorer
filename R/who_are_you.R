@@ -24,7 +24,7 @@ who_are_you = function(pack,plot.it = TRUE,return.map = F,nwords=5,add_my_packs=
   }
   desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
-	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
+	downloads = downloads[is.element(downloads$Package,V(gd)$name),]
 	pack_depends = neighbors(graph=gd,v=pack,mode='in')
 	pack_revdepends = neighbors(graph=gd,v=pack,mode='out')
 	pack_revsuggests = neighbors(graph=gs,v=pack,mode='out')
@@ -86,7 +86,7 @@ who_are_you = function(pack,plot.it = TRUE,return.map = F,nwords=5,add_my_packs=
 		labels = lapply(labels, HTML)
 	}else{
 		if(point.size=='downloads'){
-			desc.rate = downloads$mean.desc[match(V(g)$name,as.character(downloads$paq))]
+			desc.rate = downloads$Downloads[match(V(g)$name,as.character(downloads$Package))]
 			radii = min.point.size + (max.point.size-min.point.size)*desc.rate/max(desc.rate,na.rm=T)
 			radii[is.na(radii)] = min.point.size 
 			labels = lapply(1:length(V(g)), function(i){paste(labs[[i]],' <p>','Downloads rate: ',round(desc.rate[i],3),'</p>',sep='')})

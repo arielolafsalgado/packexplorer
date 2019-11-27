@@ -81,7 +81,7 @@ expre2graph = function(expression,plot.it=FALSE,first.neighbors=FALSE,return.map
 		labels = lapply(labels, HTML)
 	}else{
 		if(point.size=='downloads'){
-			desc.rate = downloads$mean.desc[match(V(g)$name,as.character(downloads$paq))]
+			desc.rate = downloads$Downloads[match(V(g)$name,as.character(downloads$Package))]
 			radii = min.point.size + (max.point.size-min.point.size)*desc.rate/max(desc.rate,na.rm=T)
 			radii[is.na(radii)] = min.point.size 
 			labels = lapply(1:length(V(g)), function(i){paste(labs[[i]],' <p>','Downloads rate: ',round(desc.rate[i],3),'</p>',sep='')})
