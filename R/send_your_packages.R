@@ -7,7 +7,7 @@
 #' \dontrun{
 #' send_your_packages()
 #' }
-send_your_packages <- function(){
+send_your_packages = function(){
 	checkMailR = is.element('mailR',my_packages())
 	if(!checkMailR){
 		askInst = readinteger(prompt="You will need to install 'mailR' to continue

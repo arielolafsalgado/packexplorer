@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you hace
+#' Matrix construction, used to rank packages
 #'
 #' This function creates the voting matrix from your packages and the package graph.
 #' @param G The package graph, as an igraph object. Usually the Suggests graph. 
@@ -16,7 +16,8 @@
 #' @importFrom igraph as_adjacency_matrix induced_subgraph neighborhood V as.undirected
 #' @importFrom Matrix t
 
-voting_matrix <- function(G,my_packs=row.names(utils::installed.packages()),kind.of='to_packages'){
+voting_matrix = function(G,my_packs=row.names(utils::installed.packages()),kind.of='to_packages'){
+  if(any(!is.element(my_packs,V(G)$name))) return('Some packages are missing in the graph')
 	dir = switch(kind.of,'to_packages'='in','from_packages'='out','all'='all')
 	my_packs = intersect(my_packs,V(G)$name)
 	packs = unique(names(unlist(neighborhood(G,mode=dir,nodes = my_packs,order=1))))

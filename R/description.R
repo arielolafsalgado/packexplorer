@@ -6,8 +6,8 @@
 #' 
 #' @export
 #' @examples
-
-description <- function(pack){
+#' description('leaflet')
+description = function(pack){
 #	utils::data('des',envir=environment())
 	return(gsub(pattern='<p>|</p>',replacement='',x=as.character(desc$Description[is.element(desc$Package,pack)])))
 }

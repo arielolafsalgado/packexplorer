@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you have
+#' Find nearest packages to a selected group
 #'
 #' Plot your network, plus its firts neighbors, using leaflet.
 #' @param relationship The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'. 
@@ -20,14 +20,19 @@
 #' @importFrom htmltools HTML
 #' @importFrom leaflet leaflet addCircleMarkers addPolylines addLegend
 
-plot_neighbors <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',return.map =T, plot.it = F,apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
+plot_neighbors = function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',order=1,point.size='score',return.map =T, plot.it = F,apply.degree.filter=F,nwords=5,min.point.size=15,max.point.size=30){
 	desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
-	
 	dir = switch(kind.of,'to_packages'='in','from_packages'='out','all'='all')
-	my_packs = intersect(my_packs,V(gs)$name)
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)
+	not_considered_packs = setdiff(my_packges,V(G)$name)
+	my_packs = intersect(my_packs,V(G)$name)
+	if(length(my_packs)>0){
+  	if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
+	}else{
+	  return('Requested packages are not available')
+	}
 	neighs = unique(names(unlist(neighborhood(G,mode=dir,nodes = my_packs,order=order))))
 	g = induced_subgraph(G,neighs)
 	scores = recommend_me(relationship=relationship,my_packs=my_packs,kind.of=kind.of,apply.degree.filter=apply.degree.filter)

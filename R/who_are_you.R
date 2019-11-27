@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you have
+#' Characterize a package neighborhood
 #'
 #' This function gives you an ego network of a package (the package and its surrounders).
 #' @param pack The package of interest.
@@ -17,8 +17,12 @@
 #' @importFrom igraph V neighbors induced_subgraph E %<-% as_ids layout_nicely head_of tail_of E<- V<-
 #' @importFrom leaflet leaflet addCircleMarkers addPolylines addLegend addLabelOnlyMarkers labelOptions
 
-who_are_you <- function(pack,plot.it = TRUE,return.map = F,nwords=5,add_my_packs=FALSE,my_packs_neighbors=FALSE,point.size='downloads',min.point.size=15,max.point.size=30){
-	desc = desc[is.element(desc$Package,V(gd)$name),]
+who_are_you = function(pack,plot.it = TRUE,return.map = F,nwords=5,add_my_packs=FALSE,my_packs_neighbors=FALSE,point.size='downloads',min.point.size=15,max.point.size=30){
+  available_packages = intersect(V(gd)$name,intersect(V(gs)$name,intersect(V(gi)$name,V(ge)$name)))
+  if(!is.element(pack,available_packages)){
+    return('Requested package is not available')  
+  }
+  desc = desc[is.element(desc$Package,V(gd)$name),]
 	cats = cats[is.element(cats$Package,V(gd)$name),]
 	downloads = downloads[is.element(downloads$paq,V(gd)$name),]
 	pack_depends = neighbors(graph=gd,v=pack,mode='in')

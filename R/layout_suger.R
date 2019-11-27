@@ -10,7 +10,7 @@
 #' @examples
 #' @importFrom igraph layout_nicely degree
 
-layout_suger <- function(gs,suggested,gd=NULL,recenter.suggested=TRUE){
+layout_suger = function(gs,suggested,gd=NULL,recenter.suggested=TRUE){
     if(is.null(gd)){
         g = gs
         l0 = layout_nicely(g)

@@ -7,10 +7,12 @@
 #' 
 #' @export
 #' @examples
+#' \dontrun{
+#' g = my_network()['Suggests']
+#' generate_labels(g)
+#' }
 #' @importFrom igraph V
-generate_labels <- function(graph,nwords=15){
-#	utils::data('des',envir=environment())
-#	utils::data('cats',envir=environment())
+generate_labels = function(graph,nwords=15){
 	labs <- lapply(1:length(V(graph)), function(i) {
 		pack = V(graph)$name[i]
 		desci = as.character(desc$Description[is.element(desc$Package,pack)])

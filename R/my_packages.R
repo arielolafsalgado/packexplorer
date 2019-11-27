@@ -7,7 +7,7 @@
 #' @examples
 #' my_packages()
 
-my_packages <- function(file=NULL){
+my_packages = function(file=NULL){
 	my_packs = rownames(utils::installed.packages())
 	if(is.null(file)){
 		my_packs

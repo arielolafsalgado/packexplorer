@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you have
+#' Find packages by term, and undercover their relations
 #'
 #' Obtain a graph induced by the packages containing certain expression in their description. The expression is matched using agrep.
 #' @param expression The expression of interest 
@@ -19,10 +19,10 @@
 #' @importFrom stringr str_trim str_split
 #' @importFrom htmltools HTML
 
-expre2graph <- function(expression,plot.it=FALSE,first.neighbors=FALSE,return.map=TRUE,point.size='downloads',min.point.size=15,max.point.size=30,nwords=5){
+expre2graph = function(expression,plot.it=FALSE,first.neighbors=FALSE,return.map=TRUE,point.size='downloads',min.point.size=15,max.point.size=30,nwords=5){
 	the.desc = tolower(as.character(desc$Description))
 	which.packs = grep(expression, the.desc,ignore.case = T)
-	if(length(which.packs)==0) return('No package found')
+	if(length(which.packs)==0) return('Requested term returned no packages')
 	nodes_expre = unique(desc$Package[which.packs])
 	output = list()
 	output$nmentions = length(nodes_expre)

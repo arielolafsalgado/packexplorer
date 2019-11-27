@@ -7,8 +7,9 @@
 #' 
 #' @export
 #' @examples
+#' cut_string('Hello world',1)
 #' @importFrom stringr str_split
-cut_string <- function(text,nwords=15){
+cut_string = function(text,nwords=15){
 	if(is.null(text)) text = ''
 	if(length(text)==0) text = ''
 	if(any(is.na(text))) text = ''

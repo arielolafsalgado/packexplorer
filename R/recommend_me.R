@@ -1,4 +1,4 @@
-#' Discover new packages, related to the ones you have
+#' Rank available packages to be installed
 #'
 #' This function provides you with recommendations of new packages to install.
 #' @param relationship The kind of relationship you use to recommend. It can be 'suggests','imports','enhances' or 'depends'. 
@@ -19,13 +19,16 @@
 #' }
 #' @importFrom igraph V induced_subgraph degree
 
-recommend_me <- function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
-#	utils::data('dependsGraph',envir=environment())
-#	utils::data('suggestsGraph',envir=environment())
-#	utils::data('enhancesGraph',envir=environment())
-#	utils::data('importsGraph',envir=environment())
+recommend_me = function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)	
+	if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
+	not_considered_packs = setdiff(my_packges,V(G)$name)
 	my_packs = intersect(my_packs,V(G)$name)
+	if(length(my_packs)>0){
+	  if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
+	}else{
+	  return('Requested packages are not available')
+	}
 	VM = voting_matrix(G,my_packs,kind.of)
 	p = 1-diag(VM)
 	names(p) = row.names(VM)
