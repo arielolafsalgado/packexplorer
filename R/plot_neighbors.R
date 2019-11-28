@@ -29,7 +29,7 @@ plot_neighbors = function(relationship='suggests',my_packs = rownames(utils::ins
 	not_considered_packs = setdiff(my_packs,V(G)$name)
 	my_packs = intersect(my_packs,V(G)$name)
 	if(length(my_packs)>0){
-  	if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
+  	if(length(not_considered_packs)>0) print(paste('Note: these packages are not available in database:',paste(not_considered_packs,collapse=',')))
 	}else{
 	  return('Requested packages are not available')
 	}

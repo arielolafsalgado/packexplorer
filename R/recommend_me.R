@@ -22,7 +22,7 @@
 recommend_me = function(relationship='suggests',my_packs = rownames(utils::installed.packages()),kind.of='to_packages',apply.degree.filter=F,niter=50,nMax=NULL){
 	G = switch(relationship,'suggests'=gs,'depends'=gd,'imports'=gi,'enhances'=ge)	
 	not_considered_packs = setdiff(my_packs,V(G)$name)
-	if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
+	if(length(not_considered_packs)>0) print(paste('Note: these packages are not available in database:',paste(not_considered_packs,collapse=',')))
 	my_packs = intersect(my_packs,V(G)$name)
 	if(length(my_packs)>0){
 	  if(length(not_considered_packs)>0) print(paste('Packages not available in database:',paste(not_considered_packs,collapse=',')))
