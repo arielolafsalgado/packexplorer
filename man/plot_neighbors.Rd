@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_neighbors.R
 \name{plot_neighbors}
 \alias{plot_neighbors}
-\title{Discover new packages, related to the ones you have}
+\title{Find nearest packages to a selected group}
 \usage{
 plot_neighbors(relationship = "suggests",
   my_packs = rownames(utils::installed.packages()),

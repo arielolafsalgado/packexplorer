@@ -2,7 +2,7 @@
 % Please edit documentation in R/voting_matrix.R
 \name{voting_matrix}
 \alias{voting_matrix}
-\title{Discover new packages, related to the ones you hace}
+\title{Matrix construction, used to rank packages}
 \usage{
 voting_matrix(G, my_packs = row.names(utils::installed.packages()),
   kind.of = "to_packages")

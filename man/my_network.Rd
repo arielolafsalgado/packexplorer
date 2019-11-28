@@ -2,7 +2,7 @@
 % Please edit documentation in R/my_network.R
 \name{my_network}
 \alias{my_network}
-\title{Your own R-Network}
+\title{Your own R-Network of packages, as an igraph object}
 \usage{
 my_network()
 }

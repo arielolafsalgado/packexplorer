@@ -2,7 +2,7 @@
 % Please edit documentation in R/recommend_me.R
 \name{recommend_me}
 \alias{recommend_me}
-\title{Discover new packages, related to the ones you have}
+\title{Rank available packages to be installed}
 \usage{
 recommend_me(relationship = "suggests",
   my_packs = rownames(utils::installed.packages()),

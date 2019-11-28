@@ -17,3 +17,6 @@ Multiple values depending on the function
 \description{
 These functions help to manage the text in the leaflet plotting
 }
+\examples{
+cut_string('Hello world',1)
+}

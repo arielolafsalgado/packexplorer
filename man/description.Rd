@@ -15,3 +15,6 @@ Multiple values depending on the function
 \description{
 This functions help to manage the text in the leaflet plotting
 }
+\examples{
+description('leaflet')
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/expre2graph.R
 \name{expre2graph}
 \alias{expre2graph}
-\title{Discover new packages, related to the ones you have}
+\title{Find packages by term, and undercover their relations}
 \usage{
 expre2graph(expression, plot.it = FALSE, first.neighbors = FALSE,
   return.map = TRUE, point.size = "downloads", min.point.size = 15,

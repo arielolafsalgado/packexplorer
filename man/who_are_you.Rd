@@ -2,7 +2,7 @@
 % Please edit documentation in R/who_are_you.R
 \name{who_are_you}
 \alias{who_are_you}
-\title{Discover new packages, related to the ones you have}
+\title{Characterize a package neighborhood}
 \usage{
 who_are_you(pack, plot.it = TRUE, return.map = F, nwords = 5,
   add_my_packs = FALSE, my_packs_neighbors = FALSE,

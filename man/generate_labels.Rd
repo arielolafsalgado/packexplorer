@@ -17,3 +17,9 @@ Multiple values depending on function
 \description{
 This functions help manage the text in the leaflet plotting
 }
+\examples{
+\dontrun{
+g = my_network()['Suggests']
+generate_labels(g)
+}
+}
