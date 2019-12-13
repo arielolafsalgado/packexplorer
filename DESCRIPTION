@@ -6,7 +6,7 @@ Authors@R: as.person(c(
     "Andrés Farall <afarall@gmail.com> [aut]",
     "Inés Caridi <ines@df.uba.ar> [aut]"
   ))
-Description: This package provides you with tools for exploring the CRAN, and visualize the relations between packages. You can use leaflet to build your own package network, and get information about new packages, related to the packages you usually use.
+Description: Tools to explore CRAN and visualize relationships between packages. With a leaflet-based visualization, create your own network of packages and get information about new packages, related to the packages you use regularly. Also, find packages based on specific terms, taking into account the underlying dependency network.
 Depends: R (>= 3.5), igraph
 Imports: leaflet, stringr, Matrix, htmltools, methods
 Suggests: mailR, knitr,rmarkdown,testthat
