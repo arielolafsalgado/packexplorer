@@ -45,7 +45,7 @@ packexplorer provides you with tools to generate your own package network:
 my_nets = my_network()
 ```
 
-Now, you have four igraph objects in my_nets, "Dep","Sug","Imp" and "Enh", each one containing the graph with your packages as nodes, and the specified relation as links.
+Now, you have four igraph objects in my_nets, "Depends","Suggests","Imports" and "Enhances", each one containing the graph with your packages as nodes, and the specified relation as links.
 
 ```
 # Try plotting it!
@@ -99,13 +99,4 @@ Another possible situation is that you are interested in some kind of concept th
 expre2graph('information',plot.it=T)
 ```
 
-# One last thing
-If you liked this package, we ask you to collaborate with the project: could you send us the list of your packages? We are studying the network structure of the R users, and we need some samples to do the job. We will also ask for some extra info about your work subject. If you agree, you can send it to us using the function 
-
-```
-send_your_packages()
-```
-
-It is based on the `mailR`, and we don't ask for any personal information except for your email - we will not use this information for more than asociating an unique id to the data. 
-
-Thank you, we hope you have liked it!
+Thank you, we hope you like it!
